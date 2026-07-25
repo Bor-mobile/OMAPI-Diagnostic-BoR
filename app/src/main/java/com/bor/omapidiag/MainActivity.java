@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 
 
     private TextView output;
+    private SEService omapiService;
 
 
     private void log(String s) {
@@ -217,24 +218,24 @@ public class MainActivity extends Activity {
         try {
 
 
-            new SEService(
+            omapiService = new SEService(
 
                     this,
 
                     Executors.newSingleThreadExecutor(),
 
 
-                    service -> {
+                    () -> {
 
 
                         log(
                             "SEService connected = "
                             +
-                            service.isConnected()
+                            omapiService.isConnected()
                         );
 
 
-                        testReaders(service);
+                        testReaders(omapiService);
 
 
                     }
