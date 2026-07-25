@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
 
     private TextView output;
     private SEService omapiService;
+    private DeviceReport report;
+    private boolean captureOmapi = false;
 
 
     private void log(String s) {
@@ -31,6 +33,12 @@ public class MainActivity extends Activity {
 
         });
 
+        if(captureOmapi && report != null) {
+
+            report.addOmapiLine(s);
+
+        }
+
     }
 
 
@@ -38,6 +46,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        report = new DeviceReport(this);
 
 
         output = new TextView(this);
@@ -60,10 +70,6 @@ public class MainActivity extends Activity {
             
             
             save.setOnClickListener(v -> {
-            
-            
-                DeviceReport report =
-                        new DeviceReport(this);
             
             
                 Intent send =
@@ -213,6 +219,7 @@ public class MainActivity extends Activity {
 
 
         log("=== OMAPI ===");
+        captureOmapi = true;
 
 
         try {

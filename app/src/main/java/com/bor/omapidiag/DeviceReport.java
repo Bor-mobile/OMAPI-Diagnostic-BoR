@@ -8,11 +8,20 @@ public class DeviceReport {
 
 
     private final Context context;
+    private final StringBuilder omapiLog =
+            new StringBuilder();
 
 
     public DeviceReport(Context context) {
 
         this.context = context;
+
+    }
+
+
+    public void addOmapiLine(String line) {
+
+        omapiLog.append(line).append("\n");
 
     }
 
@@ -161,6 +170,13 @@ public class DeviceReport {
         r.append(
         scanner.scan()
 );
+
+        if(omapiLog.length() > 0) {
+
+            r.append("=== OMAPI ===\n");
+            r.append(omapiLog);
+
+        }
 
         return r.toString();
 
