@@ -212,47 +212,20 @@ public class MainActivity extends Activity {
             );
 
 
-            for(
-                    android.se.omapi.Reader r :
-                    readers
-            ) {
-
-
-                log(
-                    "Reader: "
-                    +
-                    r.getName()
+        OmapiTester tester =
+                new OmapiTester(
+                    this::log
                 );
-
-
-                try {
-
-
-                    log(
-                        "Present: "
-                        +
-                        r.isSecureElementPresent()
-                    );
-
-
-                }
-                catch(Exception e) {
-
-
-                    log(
-                        "Reader error:"
-                    );
-
-
-                    log(
-                       android.util.Log.getStackTraceString(e)
-                    );
-
-                }
-
-
-            }
-
+        
+        
+        for(
+                android.se.omapi.Reader r :
+                readers
+        ) {
+        
+            tester.testReader(r);
+        
+        }
 
         }
         catch(Exception e) {
