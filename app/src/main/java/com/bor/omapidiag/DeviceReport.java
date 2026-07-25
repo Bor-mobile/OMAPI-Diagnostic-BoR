@@ -152,7 +152,15 @@ public class DeviceReport {
 
         }
 
-
+        r.append("\n");
+        
+        ServiceScanner scanner =
+                new ServiceScanner(context);
+        
+        
+        r.append(
+        scanner.scan()
+);
 
         return r.toString();
 
