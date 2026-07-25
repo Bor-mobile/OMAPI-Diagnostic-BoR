@@ -11,6 +11,10 @@ import android.se.omapi.SEService;
 
 import java.util.concurrent.Executors;
 
+import android.widget.Button;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -43,10 +47,72 @@ public class MainActivity extends Activity {
 
         scroll.addView(output);
 
-        setContentView(scroll);
+        // setContentView(scroll);
 
 
+            Button save =
+                    new Button(this);
+            
+            save.setText(
+                    "Share Report"
+            );
+            
+            
+            save.setOnClickListener(v -> {
+            
+            
+                DeviceReport report =
+                        new DeviceReport(this);
+            
+            
+                Intent send =
+                        new Intent(
+                                Intent.ACTION_SEND
+                        );
+            
+            
+                send.setType(
+                        "text/plain"
+                );
+            
+            
+                send.putExtra(
+                        Intent.EXTRA_TEXT,
+                        report.generate()
+                );
+            
+            
+                startActivity(
+                        Intent.createChooser(
+                                send,
+                                "Send report"
+                        )
+                );
+            
+            
+            });
 
+            android.widget.LinearLayout root =
+                    new android.widget.LinearLayout(this);
+            
+            
+            root.setOrientation(
+                    android.widget.LinearLayout.VERTICAL
+            );
+            
+            
+            root.addView(
+                    save
+            );
+            
+            
+            root.addView(
+                    scroll
+            );
+            
+            
+            setContentView(root);        
+        
         log("=== OMAPI Diagnostic ===");
         log("");
 
